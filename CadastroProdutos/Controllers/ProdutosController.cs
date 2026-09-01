@@ -11,18 +11,23 @@ namespace CadastroProdutos.Controllers
     [Route("api/[controller]")]
     public class ProdutosController : ControllerBase
     {
-        private ProdutosService produtosService = new ProdutosService();
+        private IProdutosService _produtosService;
+
+        public ProdutosController(IProdutosService produtosService)
+        {
+            _produtosService = produtosService;
+        }
 
         [HttpGet]
         public ActionResult<List<Produto>> Get()
         {
-            return Ok(produtosService.ObterTodos());
+            return Ok(_produtosService.ObterTodos());
         }
 
         [HttpGet("{id}")]
         public ActionResult<Produto> GetById(int id)
         {
-            var produto = produtosService.ObterPorId(id);
+            var produto = _produtosService.ObterPorId(id);
             if(produto is null)
             {
                 return NotFound($"Produto não encontrado.");
@@ -34,14 +39,14 @@ namespace CadastroProdutos.Controllers
         [HttpPost]
         public ActionResult Post(Produto produto)
         {
-            produtosService.Adiconar(produto);
+            _produtosService.Adiconar(produto);
             return Created();
         }
 
         [HttpPut("{id}")]
         public ActionResult<Produto> Put(int id, Produto produtoAtualizado)
         {
-            var produto = produtosService.Atualizar(id, produtoAtualizado);
+            var produto = _produtosService.Atualizar(id, produtoAtualizado);
             if(produto is null)
             {
                 return NotFound($"Produto não encontrado.");
@@ -53,7 +58,7 @@ namespace CadastroProdutos.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Produto> Delete(int id)
         {
-            var produto = produtosService.Remover(id);
+            var produto = _produtosService.Remover(id);
             if(!produto)
             {
                 return NotFound($"Produto não encontrado.");

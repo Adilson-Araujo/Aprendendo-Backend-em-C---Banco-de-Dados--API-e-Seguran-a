@@ -1,24 +1,26 @@
+using CadastroProdutos.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers(); // Adicionar Controllers 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(); // Swagger
+
+// Injeção de Dependência
+builder.Services.AddScoped<IProdutosService, ProdutosService>();
 
 var app = builder.Build();
-app.MapControllers();
+app.MapControllers(); // Controllers
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(); // Swagger
+    app.UseSwaggerUI(); // Swagger
 }
 
 app.UseHttpsRedirection();
-
-
-
 
 var produtos = new List<Produto>()
 {
