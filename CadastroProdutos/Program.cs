@@ -1,4 +1,6 @@
+using CadastroProdutos.Database;
 using CadastroProdutos.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ builder.Services.AddSwaggerGen(); // Swagger
 
 // Injeção de Dependência
 builder.Services.AddScoped<IProdutosService, ProdutosService>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = Produtos.db"));
 
 var app = builder.Build();
 app.MapControllers(); // Controllers

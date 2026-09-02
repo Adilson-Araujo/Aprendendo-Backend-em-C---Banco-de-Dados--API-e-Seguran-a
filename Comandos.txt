@@ -1,0 +1,5 @@
+script: Criar estrutura do Banco de dados
+    dotnet ef migrations add CriacaoBancoDados
+
+Aplicar script
+    dotnet ef database update
