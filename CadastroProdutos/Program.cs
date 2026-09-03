@@ -133,3 +133,11 @@ public class Produto
     [Range(0, int.MaxValue, ErrorMessage = "O estoque não pode ser negativo")]
     public int Estoque { get; set; }
 }
+
+public class Login
+{
+    [Required]
+    public string Usuario { get; set; }
+    [Required]
+    public string Senha { get; set; }
+}
