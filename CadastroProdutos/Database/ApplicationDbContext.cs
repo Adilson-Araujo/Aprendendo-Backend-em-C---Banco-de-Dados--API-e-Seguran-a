@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CadastroProdutos.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CadastroProdutos.Database

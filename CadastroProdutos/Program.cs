@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using CadastroProdutos.Database;
+using CadastroProdutos.Models;
 using CadastroProdutos.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -148,25 +149,6 @@ app.MapDelete("/produtos/{id}", (int id) =>
 app.Run();
 
 
-public class Produto
-{
-    public int Id { get; set; }
-    
-    [Required(ErrorMessage = "O nome do produto é obrigatório.")]
-    [StringLength(100, ErrorMessage = "O nome pode ter no máximo 100 caracteres.")]
-    public string Nome { get; set; } = string.Empty;
 
-    [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que 0")]
-    public decimal Preco { get; set; }
 
-    [Range(0, int.MaxValue, ErrorMessage = "O estoque não pode ser negativo")]
-    public int Estoque { get; set; }
-}
 
-public class Login
-{
-    [Required]
-    public string Usuario { get; set; }
-    [Required]
-    public string Senha { get; set; }
-}
