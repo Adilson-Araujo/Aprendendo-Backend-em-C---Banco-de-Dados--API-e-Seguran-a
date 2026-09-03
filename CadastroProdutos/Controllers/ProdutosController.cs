@@ -38,6 +38,7 @@ namespace CadastroProdutos.Controllers
             return Ok(produto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Post(Produto produto)
         {
@@ -52,6 +53,7 @@ namespace CadastroProdutos.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut("{id}")]
         public ActionResult<Produto> Put(int id, Produto produtoAtualizado)
         {
@@ -71,6 +73,7 @@ namespace CadastroProdutos.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public ActionResult<Produto> Delete(int id)
         {
