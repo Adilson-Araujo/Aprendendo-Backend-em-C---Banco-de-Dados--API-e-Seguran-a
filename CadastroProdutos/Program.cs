@@ -16,30 +16,19 @@ builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen(); // Swagger
 builder.Services.AddSwaggerGen(x =>
 {
-   x.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
+   x.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.OpenApiSecurityScheme()
    {
-        Description = @"Insira o JWT no  campo abaixo usando o seguinte formato: Bearer {seu_token}.",
+        Description = @"Cole Apenas seu token JWT",
         Name = "Authorization",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
+        In = Microsoft.OpenApi.ParameterLocation.Header,
+        Type = Microsoft.OpenApi.SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT"
    }); 
-   x.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement()
+   
+   x.AddSecurityRequirement(document => new()
    {
-       {
-           new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-           {
-               Reference = new Microsoft.OpenApi.Models.OpenApiReference
-               {
-                   Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                   Id = "Bearer"
-               },
-               Scheme = "oauth2",
-               Name = "Bearer",
-               In = Microsoft.OpenApi.Models.ParameterLocation.Header
-           },
-           new List<string>()
-       }
+        [new Microsoft.OpenApi.OpenApiSecuritySchemeReference("Bearer", document)] = []
    });
 });
 
